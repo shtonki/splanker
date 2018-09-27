@@ -39,7 +39,7 @@ namespace splanker
             GL.ClearColor(Color.CornflowerBlue);
             GL.PushMatrix();
 
-            foreach (var en in room.entities)
+            foreach (var en in room.Entities)
             {
                 GL.Begin(PrimitiveType.Quads);
 

@@ -11,20 +11,23 @@ namespace splanker
     {
         private static void Main(string[] args)
         {
-            launch();
+            Launch();
         }
 
-        public static void launch()
+        /// <summary>
+        /// Launces the application
+        /// </summary>
+        public static void Launch()
         {
-            ManualResetEventSlim loadre = new ManualResetEventSlim();
-            Thread t = new Thread(launchEx);
-            t.Start(loadre);
-            loadre.Wait();
+            Thread t = new Thread(LaunchGUI);
+            t.Start();
         }
 
-        private static void launchEx(object o)
+        /// <summary>
+        /// Help function to Launch
+        /// <param name="o"></param>
+        private static void LaunchGUI()
         {
-            ManualResetEventSlim loadre = (ManualResetEventSlim)o;
             var frame = new GameFrame();
             frame.Run(100, 0);
         }

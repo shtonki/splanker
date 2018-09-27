@@ -23,7 +23,7 @@ namespace splanker
     /// </summary>
     class Entities : IEnumerable<Entity>
     {
-        private List<Entity> EntityList;
+        private List<Entity> EntityList = new List<Entity>();
 
         /// <summary>
         /// Adds an entity

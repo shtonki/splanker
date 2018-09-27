@@ -47,11 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameFrame.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="src\gui\GameFrame.cs" />
+    <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="state\Entity.cs" />
-    <Compile Include="state\Room.cs" />
+    <Compile Include="src\state\Entity.cs" />
+    <Compile Include="src\state\Room.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
