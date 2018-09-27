@@ -1,4 +1,5 @@
-﻿using System;
+﻿using splanker.src.util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,18 +9,6 @@ namespace splanker
 {
     class Entity
     {
-        private float x, y;
-
-        public float X
-        {
-            get { return x; }
-            set { x = value; }
-        }
-
-        public float Y
-        {
-            get { return y; }
-            set { y = value; }
-        }
+        public GameCoordinate Location { get; } = new GameCoordinate();
     }
 }

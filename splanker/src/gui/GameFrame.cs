@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
-using OpenTK.Input;
+using splanker.src.gui;
 
 namespace splanker
 {
     class GameFrame : GameWindow
     {
-        Room room = new Room();
+        public Screen CurrentScreen { get; set; }
 
         public GameFrame() : base(1024, 720, new GraphicsMode(32, 24, 0, 32))
         {
@@ -39,25 +35,14 @@ namespace splanker
             GL.ClearColor(Color.CornflowerBlue);
             GL.PushMatrix();
 
-            foreach (var en in room.Entities)
+            if (CurrentScreen != null)
             {
-                GL.Begin(PrimitiveType.Quads);
+                DrawFacade drawFacade = new DrawFacade();
 
-                GL.Color4(Color.AliceBlue);
-
-                var x = en.X;
-                var y = en.Y;
-                var w = 0.1;
-                var h = 0.1;
-
-                GL.Vertex2(x, y);
-                GL.Vertex2(x, y+h);
-                GL.Vertex2(x+w, y+h);
-                GL.Vertex2(x+w, y);
-
-                GL.End();
+                CurrentScreen.Draw(drawFacade);
             }
-            this.SwapBuffers();
+
+            SwapBuffers();
             GL.PopMatrix();
         }
     }

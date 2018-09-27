@@ -1,4 +1,5 @@
-﻿using System;
+﻿using splanker.src.gui;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,12 +16,12 @@ namespace splanker
         }
 
         /// <summary>
-        /// Launces the application
+        /// Launches the application
         /// </summary>
         public static void Launch()
         {
-            Thread t = new Thread(LaunchGUI);
-            t.Start();
+            Thread guiThread = new Thread(LaunchGUI);
+            guiThread.Start();
         }
 
         /// <summary>
@@ -29,6 +30,7 @@ namespace splanker
         private static void LaunchGUI()
         {
             var frame = new GameFrame();
+            frame.CurrentScreen = ScreenController.MainMenuScreen;
             frame.Run(100, 0);
         }
     }
