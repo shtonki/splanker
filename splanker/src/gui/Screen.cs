@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenTK;
+using splanker.src.state;
 
 namespace splanker.src.gui
 {
@@ -16,10 +18,18 @@ namespace splanker.src.gui
         private static Screen GenerateMainMenu()
         {
             var screen = new Screen();
+            
 
             screen.guiElements.Add(new RectangularElement(
                 new GLCoordinate(0, 0), 
                 new GLCoordinate(0.2f, 0.2f)));
+
+            return screen;
+        }
+
+        public static GameScreen GenerateGameScreen(GameState gs)
+        {
+            var screen = new GameScreen(gs);
 
             return screen;
         }
@@ -29,12 +39,42 @@ namespace splanker.src.gui
     {
         public List<GUIElement> guiElements = new List<GUIElement>();
 
-        public void Draw(DrawFacade drawFacade)
+        public virtual void Draw(DrawFacade drawFacade)
         {
             foreach (var guiElement in guiElements)
             {
                 guiElement.Draw(drawFacade);
             }
+        }
+
+        public virtual void Step()
+        {
+            
+        }
+    }
+
+    class GameScreen : Screen
+    {
+        public GameState GameState { get; }
+
+        public GameScreen(GameState gameState)
+        {
+            GameState = gameState;
+        }
+
+        public override void Draw(DrawFacade drawFacade)
+        {
+            base.Draw(drawFacade);
+            foreach (var entity in GameState.CurrentRoom.Entities)
+            {
+                entity.Draw(drawFacade);
+            }
+
+        }
+
+        public override void Step()
+        {
+            GameState.Step();
         }
     }
 }

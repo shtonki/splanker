@@ -4,6 +4,7 @@ using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using splanker.src.gui;
+using splanker.src.state;
 
 namespace splanker
 {
@@ -25,6 +26,8 @@ namespace splanker
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             base.OnUpdateFrame(e);
+            CurrentScreen?.Step();
+
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)

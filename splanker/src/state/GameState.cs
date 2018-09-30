@@ -10,5 +10,14 @@ namespace splanker.src.state
     {
         public Room CurrentRoom { get; private set; }
 
+        public GameState()
+        {
+            CurrentRoom = new Room();
+        }
+
+        public void Step()
+        {
+            CurrentRoom.UpdateEntities();
+        }
     }
 }

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using splanker.src.gui;
+using splanker.src.util;
 
 namespace splanker
 {
@@ -13,6 +15,14 @@ namespace splanker
 
         public Room()
         {
+        }
+
+        public void UpdateEntities()
+        {
+            foreach (var ent in Entities)
+            {
+
+            }
         }
 
     }

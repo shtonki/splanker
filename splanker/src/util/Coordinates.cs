@@ -21,6 +21,12 @@ namespace splanker.src.util
             get { return y; }
             set { y = value; }
         }
+
+        public GameCoordinate(float x, float y)
+        {
+            this.x = x;
+            this.y = y;
+        }
     }
 
     class GLCoordinate

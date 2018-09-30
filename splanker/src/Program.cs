@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using splanker.src.state;
+using splanker.src.util;
 
 namespace splanker
 {
@@ -30,7 +32,17 @@ namespace splanker
         private static void LaunchGUI()
         {
             var frame = new GameFrame();
+            GameState gameState = new GameState();
+            Entity e1 = new Entity();
+            e1.Location = new GameCoordinate(0.2f, 0.2f);
+            Entity e2 = new Entity();
+            e1.Location = new GameCoordinate(0.7f, 0.7f);
+            gameState.CurrentRoom.Entities.Add(e1);
+            gameState.CurrentRoom.Entities.Add(e2);
+
+
             frame.CurrentScreen = ScreenController.MainMenuScreen;
+            frame.CurrentScreen = ScreenController.GenerateGameScreen(gameState);
             frame.Run(100, 0);
         }
     }
