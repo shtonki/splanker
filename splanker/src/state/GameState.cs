@@ -17,7 +17,7 @@ namespace splanker.src.state
 
         public void Step()
         {
-            CurrentRoom.UpdateEntities();
+            CurrentRoom.Step();
         }
     }
 }

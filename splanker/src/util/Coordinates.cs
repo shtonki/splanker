@@ -27,6 +27,11 @@ namespace splanker.src.util
             this.x = x;
             this.y = y;
         }
+
+        public static GameCoordinate operator +(GameCoordinate a, GameCoordinate b)
+        {
+            return new GameCoordinate(a.X + b.X, a.Y + b.Y);
+        }
     }
 
     class GLCoordinate

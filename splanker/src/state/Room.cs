@@ -17,11 +17,11 @@ namespace splanker
         {
         }
 
-        public void UpdateEntities()
+        public void Step()
         {
             foreach (var ent in Entities)
             {
-
+                ent.Step();
             }
         }
 

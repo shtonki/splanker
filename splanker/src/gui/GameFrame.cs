@@ -27,7 +27,6 @@ namespace splanker
         {
             base.OnUpdateFrame(e);
             CurrentScreen?.Step();
-
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
