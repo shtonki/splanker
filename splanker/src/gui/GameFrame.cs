@@ -12,11 +12,12 @@ namespace splanker
     class GameFrame : GameWindow
     {
 
+        private const int TheOnlyGamePadIndexWhichWillBeChecked = 0;
+
         public Screen CurrentScreen { get; set; }
 
         public GameFrame() : base(1024, 720, new GraphicsMode(32, 24, 0, 32))
         {
-            
         }
 
         protected override void OnResize(EventArgs e)
@@ -25,11 +26,51 @@ namespace splanker
             GL.Viewport(0, 0, Width, Height);
         }
 
+
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             base.OnUpdateFrame(e);
+
+            HandleGamePad();
+
             CurrentScreen?.Step();
         }
+
+        private GamePadState PreviousGamePadState;
+        private void HandleGamePad()
+        {
+            var currentGamePadState = GamePad.GetState(TheOnlyGamePadIndexWhichWillBeChecked);
+            if (currentGamePadState.IsConnected && PreviousGamePadState.IsConnected)
+            {
+                // DPad Left
+                if (currentGamePadState.DPad.IsLeft)
+                    CurrentScreen?.HandleInput(new InputUnion(PreviousGamePadState.DPad.IsLeft ? InputUnion.Directions.Repeat : InputUnion.Directions.Down, Buttons.DPadLeft));
+                else if (PreviousGamePadState.DPad.IsLeft)
+                    CurrentScreen?.HandleInput(new InputUnion(InputUnion.Directions.Up, Buttons.DPadLeft));
+
+                // DPad Right
+                if (currentGamePadState.DPad.IsRight)
+                    CurrentScreen?.HandleInput(new InputUnion(PreviousGamePadState.DPad.IsRight ? InputUnion.Directions.Repeat : InputUnion.Directions.Down, Buttons.DPadRight));
+                else if (PreviousGamePadState.DPad.IsRight)
+                    CurrentScreen?.HandleInput(new InputUnion(InputUnion.Directions.Up, Buttons.DPadRight));
+
+                // DPad Left
+                if (currentGamePadState.DPad.IsDown)
+                    CurrentScreen?.HandleInput(new InputUnion(PreviousGamePadState.DPad.IsDown ? InputUnion.Directions.Repeat : InputUnion.Directions.Down, Buttons.DPadDown));
+                else if (PreviousGamePadState.DPad.IsDown)
+                    CurrentScreen?.HandleInput(new InputUnion(InputUnion.Directions.Up, Buttons.DPadDown));
+
+                // DPad Up
+                if (currentGamePadState.DPad.IsUp)
+                    CurrentScreen?.HandleInput(new InputUnion(PreviousGamePadState.DPad.IsUp ? InputUnion.Directions.Repeat : InputUnion.Directions.Down, Buttons.DPadUp));
+                else if (PreviousGamePadState.DPad.IsUp)
+                    CurrentScreen?.HandleInput(new InputUnion(InputUnion.Directions.Up, Buttons.DPadUp));
+
+            }
+            PreviousGamePadState = currentGamePadState;
+        }
+
+
 
         protected override void OnRenderFrame(FrameEventArgs e)
         {
@@ -61,5 +102,7 @@ namespace splanker
             base.OnKeyUp(e);
             CurrentScreen?.HandleInput(new InputUnion(InputUnion.Directions.Up, e));
         }
+
+
     }
 }

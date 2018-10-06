@@ -11,15 +11,33 @@ namespace splanker.src.util
         public KeyboardKeyEventArgs KeyboardArgs { get; }
         public bool IsKeyboardInput => KeyboardArgs != null;
 
+        public Buttons GamePadButtonArgs { get; }
+        public bool IsGamePadInput => GamePadButtonArgs != null;
+
         public InputUnion(Directions direction, KeyboardKeyEventArgs keyboardArgs)
         {
             Direction = direction;
             KeyboardArgs = keyboardArgs;
         }
 
+        public InputUnion(Directions direction, Buttons gamePadButtonArgs)
+        {
+            Direction = direction;
+            GamePadButtonArgs = gamePadButtonArgs;
+        }
+
         public override string ToString()
         {
-            return KeyboardArgs.Key.ToString();
+            if (IsKeyboardInput)
+            {
+                return KeyboardArgs.Key.ToString();
+            }
+            if (IsGamePadInput)
+            {
+                return GamePadButtonArgs.ToString();
+            }
+
+            return "Failed to stringify InputUnion";
         }
     }
 
@@ -28,10 +46,13 @@ namespace splanker.src.util
     /// </summary>
     class HotkeyMapping
     {
-        private Func<InputUnion, bool> Filter { get; }
-        private Action<InputUnion> Callback { get; }
+        public delegate void HotkeyCallback(InputUnion input);
+        public delegate bool HotkeyFilter(InputUnion input);
 
-        public HotkeyMapping(Func<InputUnion, bool> filter, Action<InputUnion> callback)
+        private HotkeyFilter Filter { get; }
+        private HotkeyCallback Callback { get; }
+
+        public HotkeyMapping(HotkeyFilter filter, HotkeyCallback callback)
         {
             this.Filter = filter;
             this.Callback = callback;
@@ -48,6 +69,25 @@ namespace splanker.src.util
             {
                 Callback(input);
             }
+        }
+
+    }
+
+    class Hotkey
+    {
+        public HotkeyMapping Activate { get; }
+        public HotkeyMapping Deactivate { get; }
+
+        public Hotkey(
+            HotkeyMapping.HotkeyFilter filter,
+            HotkeyMapping.HotkeyCallback activate,
+            HotkeyMapping.HotkeyCallback deactivate
+            )
+        {
+            Activate = new HotkeyMapping(input => 
+                filter(input) && input.Direction == InputUnion.Directions.Down, activate);
+            Deactivate = new HotkeyMapping(input =>
+                filter(input) && input.Direction == InputUnion.Directions.Up, deactivate);
         }
     }
 }
