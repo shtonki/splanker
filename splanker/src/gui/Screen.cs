@@ -1,12 +1,6 @@
 ﻿using splanker.src.gui.GUIElements;
 using splanker.src.util;
-using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenTK;
 using splanker.src.state;
 
 namespace splanker.src.gui
