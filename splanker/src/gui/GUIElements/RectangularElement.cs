@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace splanker.src.gui.GUIElements
 {
-    class RectangularElement : GUIElement
+    class RectangularElement : IGUIElement
     {
         public GLCoordinate Origin;
         public GLCoordinate Terminus;

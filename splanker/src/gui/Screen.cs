@@ -34,7 +34,7 @@ namespace splanker.src.gui
         /// <summary>
         /// Contains all the guiElements which are rendered to a frame.
         /// </summary>
-        public List<GUIElement> guiElements = new List<GUIElement>();
+        public List<IGUIElement> guiElements = new List<IGUIElement>();
 
         public virtual void HandleInput(InputUnion input)
         {

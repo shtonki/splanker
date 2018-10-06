@@ -8,7 +8,7 @@ namespace splanker.src.util
 {
     static class Logging
     {
-        public static Logger DefaultLogger = new ConsoleLogger();
+        public static ILogger DefaultLogger = new ConsoleLogger();
     }
 
     interface ILogger
@@ -16,7 +16,7 @@ namespace splanker.src.util
         void Log(object debugpurposesonlyplease);
     }
 
-    class ConsoleLogger : Logger
+    class ConsoleLogger : ILogger
     {
         public void Log(object debugpurposesonlyplease)
         {
