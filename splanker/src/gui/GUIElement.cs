@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace splanker.src.gui
 {
-    interface GUIElement
+    interface IGUIElement
     {
         void Draw(DrawFacade drawFacade);
     }

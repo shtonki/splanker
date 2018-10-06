@@ -11,7 +11,7 @@ namespace splanker.src.util
         public static Logger DefaultLogger = new ConsoleLogger();
     }
 
-    interface Logger
+    interface ILogger
     {
         void Log(object debugpurposesonlyplease);
     }
