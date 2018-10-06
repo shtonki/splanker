@@ -12,7 +12,7 @@ namespace splanker.src.Network
     class GameConnection
     {
         const int PORT_NO = 420;
-        const string SERVER_IP = "46.239.124.155";
+        const string SERVER_IP = "155.4.133.189";
 
         public void Connect()
         {
@@ -23,14 +23,14 @@ namespace splanker.src.Network
                 select nic.GetPhysicalAddress().ToString()
             ).FirstOrDefault();
 
-            if (macAddr.StartsWith("0860"))
+            if (!macAddr.StartsWith("0860"))
             {
-                Console.WriteLine("seba");
+                Console.WriteLine("jasin");
                 BeHost();
             }
             else
             {
-                Console.WriteLine("not seba");
+                Console.WriteLine("seba");
                 BeClient();
             }
         }
