@@ -32,13 +32,20 @@ namespace splanker.src.gui
     class Screen
     {
         /// <summary>
-        /// Contains all the guiElements which are rendered to a frame.
+        /// Contains all the guiElements which are rendered to a frame
         /// </summary>
         public List<IGUIElement> guiElements = new List<IGUIElement>();
+
+        protected List<HotkeyMapping> Keybindings { get; } = new List<HotkeyMapping>();
 
         public virtual void HandleInput(InputUnion input)
         {
             Logging.DefaultLogger.Log(input);
+
+            foreach (var keybinding in Keybindings)
+            {
+                keybinding.tickle(input);
+            }
         }
 
         /// <summary>
@@ -65,6 +72,24 @@ namespace splanker.src.gui
         public GameScreen(GameState gameState)
         {
             GameState = gameState;
+
+            // debug keybindings eh
+
+            Keybindings.Add(new HotkeyMapping(
+                input => input.IsKeyboardInput && input.Direction == InputUnion.Directions.Down,
+                input => GameState.Hero.Speed.X = -0.01f
+                ));
+
+            Keybindings.Add(new HotkeyMapping(
+                input => input.IsKeyboardInput && input.Direction == InputUnion.Directions.Up,
+                input => GameState.Hero.Speed.X = 0
+                ));
+
+
+            Keybindings.Add(new HotkeyMapping(
+                input => input.IsKeyboardInput && input.Direction == InputUnion.Directions.Repeat,
+                input => { GameState.Hero.Speed.X = 0; GameState.Hero.Speed.Y = -0.01f; }
+                ));
         }
 
         public override void Draw(DrawFacade drawFacade)

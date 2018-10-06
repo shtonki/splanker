@@ -53,13 +53,13 @@ namespace splanker
         protected override void OnKeyDown(KeyboardKeyEventArgs e)
         {
             base.OnKeyDown(e);
-            CurrentScreen?.HandleInput(new InputUnion(e));
+            CurrentScreen?.HandleInput(new InputUnion(e.IsRepeat ? InputUnion.Directions.Repeat : InputUnion.Directions.Down, e));
         }
 
         protected override void OnKeyUp(KeyboardKeyEventArgs e)
         {
             base.OnKeyUp(e);
-            CurrentScreen?.HandleInput(new InputUnion(e));
+            CurrentScreen?.HandleInput(new InputUnion(InputUnion.Directions.Up, e));
         }
     }
 }

@@ -40,9 +40,8 @@ namespace splanker
         {
             var frame = new GameFrame();
             GameState gameState = new GameState();
-            Entity e1 = new Entity();
+            Entity e1 = gameState.Hero;
             e1.Location = new GameCoordinate(0.2f, 0.2f);
-            e1.Speed.X = -0.01f;
             Entity e2 = new Entity();
             e1.Location = new GameCoordinate(0.7f, 0.7f);
             gameState.CurrentRoom.Entities.Add(e1);
