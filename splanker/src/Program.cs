@@ -42,6 +42,7 @@ namespace splanker
             GameState gameState = new GameState();
             Entity e1 = gameState.Hero;
             e1.Location = new GameCoordinate(0.2f, 0.2f);
+            e1.Size = new GameCoordinate(0.1f, 0.1f);
             Entity e2 = new Entity();
             e1.Location = new GameCoordinate(0.7f, 0.7f);
             gameState.CurrentRoom.Entities.Add(e1);
