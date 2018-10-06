@@ -55,6 +55,7 @@
     <Compile Include="src\gui\screens\GameScreen.cs" />
     <Compile Include="src\gui\screens\MainMenuScreen.cs" />
     <Compile Include="src\gui\Sprite.cs" />
+    <Compile Include="src\Network\GameConnection.cs" />
     <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\state\Entity.cs" />

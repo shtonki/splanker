@@ -11,7 +11,7 @@ namespace splanker.src.util
         public KeyboardKeyEventArgs KeyboardArgs { get; }
         public bool IsKeyboardInput => KeyboardArgs != null;
 
-        public Buttons GamePadButtonArgs { get; }
+        public Buttons? GamePadButtonArgs { get; }
         public bool IsGamePadInput => GamePadButtonArgs != null;
 
         public InputUnion(Directions direction, KeyboardKeyEventArgs keyboardArgs)
@@ -63,7 +63,7 @@ namespace splanker.src.util
         /// a callback ensues
         /// </summary>
         /// <param name="input">The input to be filtered and subsequently provided to the callback</param>
-        public void tickle(InputUnion input)
+        public void Tickle(InputUnion input)
         {
             if (Filter(input))
             {

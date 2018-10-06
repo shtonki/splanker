@@ -26,7 +26,6 @@ namespace splanker
             GL.Viewport(0, 0, Width, Height);
         }
 
-
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             base.OnUpdateFrame(e);

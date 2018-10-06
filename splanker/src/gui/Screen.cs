@@ -34,7 +34,7 @@ namespace splanker.src.gui
 
             foreach (var keybinding in Keybindings)
             {
-                keybinding.tickle(input);
+                keybinding.Tickle(input);
             }
         }
 

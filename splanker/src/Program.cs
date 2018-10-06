@@ -7,6 +7,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using splanker.src.state;
 using splanker.src.util;
+using splanker.src.Network;
+using System.Net.NetworkInformation;
 
 namespace splanker
 {
@@ -18,9 +20,22 @@ namespace splanker
         /// </summary>
         public const int OpenGLUpdateFrequency = 100;
 
+        public const bool RunDebugNonsense = true;
+
+        public static void DebugNonsense(string[] args)
+        {
+            var gameConnection = new GameConnection();
+            gameConnection.Connect();
+        }
+
 
         private static void Main(string[] args)
         {
+            if (RunDebugNonsense)
+            {
+                DebugNonsense(args);
+            }
+
             Launch();
         }
 
