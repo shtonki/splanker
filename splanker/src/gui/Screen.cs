@@ -2,7 +2,6 @@
 using splanker.src.util;
 using System.Collections.Generic;
 using splanker.src.state;
-using System.Timers;
 
 namespace splanker.src.gui
 {

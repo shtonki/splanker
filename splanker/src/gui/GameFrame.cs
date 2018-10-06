@@ -5,7 +5,6 @@ using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using splanker.src.gui;
-using splanker.src.state;
 using splanker.src.util;
 
 namespace splanker
