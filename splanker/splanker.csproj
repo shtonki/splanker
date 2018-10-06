@@ -52,6 +52,8 @@
     <Compile Include="src\gui\GUIElement.cs" />
     <Compile Include="src\gui\GUIElements\RectangularElement.cs" />
     <Compile Include="src\gui\Screen.cs" />
+    <Compile Include="src\gui\screens\GameScreen.cs" />
+    <Compile Include="src\gui\screens\MainMenuScreen.cs" />
     <Compile Include="src\gui\Sprite.cs" />
     <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -2,24 +2,13 @@
 using splanker.src.util;
 using System.Collections.Generic;
 using splanker.src.state;
+using splanker.src.gui.screens;
 
 namespace splanker.src.gui
 {
     static class ScreenController
     {
-        public static Screen MainMenuScreen = GenerateMainMenu();
-
-        private static Screen GenerateMainMenu()
-        {
-            var screen = new Screen();
-            
-
-            screen.guiElements.Add(new RectangularElement(
-                new GLCoordinate(0, 0), 
-                new GLCoordinate(0.2f, 0.2f)));
-
-            return screen;
-        }
+        public static Screen MainMenuScreen = new MainMenuScreen();
 
         public static GameScreen GenerateGameScreen(GameState gs)
         {
@@ -29,8 +18,9 @@ namespace splanker.src.gui
         }
     }
 
-    class Screen
+    abstract class Screen
     {
+
         /// <summary>
         /// Contains all the guiElements which are rendered to a frame
         /// </summary>
@@ -65,47 +55,5 @@ namespace splanker.src.gui
         }
     }
 
-    class GameScreen : Screen
-    {
-        public GameState GameState { get; }
-
-        public GameScreen(GameState gameState)
-        {
-            GameState = gameState;
-
-            // debug keybindings eh
-
-            Keybindings.Add(new HotkeyMapping(
-                input => input.IsKeyboardInput && input.Direction == InputUnion.Directions.Down,
-                input => GameState.Hero.Speed.X = -0.01f
-                ));
-
-            Keybindings.Add(new HotkeyMapping(
-                input => input.IsKeyboardInput && input.Direction == InputUnion.Directions.Up,
-                input => GameState.Hero.Speed.X = 0
-                ));
-
-
-            Keybindings.Add(new HotkeyMapping(
-                input => input.IsKeyboardInput && input.Direction == InputUnion.Directions.Repeat,
-                input => { GameState.Hero.Speed.X = 0; GameState.Hero.Speed.Y = -0.01f; }
-                ));
-        }
-
-        public override void Draw(DrawFacade drawFacade)
-        {
-            base.Draw(drawFacade);
-            foreach (var entity in GameState.CurrentRoom.Entities)
-            {
-                entity.Draw(drawFacade);
-            }
-
-        }
-
-        public override void Step()
-        {
-            base.Step();
-            GameState.Step();
-        }
-    }
+    
 }

@@ -48,7 +48,7 @@ namespace splanker
             gameState.CurrentRoom.Entities.Add(e2);
 
 
-            frame.CurrentScreen = ScreenController.MainMenuScreen;
+            //frame.CurrentScreen = ScreenController.MainMenuScreen;
             frame.CurrentScreen = ScreenController.GenerateGameScreen(gameState);
             frame.Run(OpenGLUpdateFrequency, 0);
         }
