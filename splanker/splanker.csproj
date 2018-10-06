@@ -59,6 +59,8 @@
     <Compile Include="src\state\GameState.cs" />
     <Compile Include="src\state\Room.cs" />
     <Compile Include="src\util\Coordinates.cs" />
+    <Compile Include="src\util\Hotkey.cs" />
+    <Compile Include="src\util\Logging.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

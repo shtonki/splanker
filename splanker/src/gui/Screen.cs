@@ -2,6 +2,7 @@
 using splanker.src.util;
 using System.Collections.Generic;
 using splanker.src.state;
+using System.Timers;
 
 namespace splanker.src.gui
 {
@@ -31,8 +32,20 @@ namespace splanker.src.gui
 
     class Screen
     {
+        /// <summary>
+        /// Contains all the guiElements which are rendered to a frame.
+        /// </summary>
         public List<GUIElement> guiElements = new List<GUIElement>();
 
+        public virtual void HandleInput(InputUnion input)
+        {
+            Logging.DefaultLogger.Log(input);
+        }
+
+        /// <summary>
+        /// Draws one frame of the screen.
+        /// </summary>
+        /// <param name="drawFacade">The DrawFacade provides an interface the screen can use to draw to the frame.</param>
         public virtual void Draw(DrawFacade drawFacade)
         {
             foreach (var guiElement in guiElements)
@@ -43,7 +56,6 @@ namespace splanker.src.gui
 
         public virtual void Step()
         {
-            
         }
     }
 
@@ -68,6 +80,7 @@ namespace splanker.src.gui
 
         public override void Step()
         {
+            base.Step();
             GameState.Step();
         }
     }

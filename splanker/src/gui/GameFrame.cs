@@ -3,13 +3,16 @@ using System.Drawing;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
+using OpenTK.Input;
 using splanker.src.gui;
 using splanker.src.state;
+using splanker.src.util;
 
 namespace splanker
 {
     class GameFrame : GameWindow
     {
+
         public Screen CurrentScreen { get; set; }
 
         public GameFrame() : base(1024, 720, new GraphicsMode(32, 24, 0, 32))
@@ -46,6 +49,18 @@ namespace splanker
 
             SwapBuffers();
             GL.PopMatrix();
+        }
+
+        protected override void OnKeyDown(KeyboardKeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+            CurrentScreen?.HandleInput(new InputUnion(e));
+        }
+
+        protected override void OnKeyUp(KeyboardKeyEventArgs e)
+        {
+            base.OnKeyUp(e);
+            CurrentScreen?.HandleInput(new InputUnion(e));
         }
     }
 }

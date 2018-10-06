@@ -12,6 +12,13 @@ namespace splanker
 {
     internal class Program
     {
+        /// <summary>
+        /// The frequency in Hz that GameFrame.OnUpdateFrame gets called and 
+        /// subsequently the tickrate for Screen.Update
+        /// </summary>
+        public const int OpenGLUpdateFrequency = 100;
+
+
         private static void Main(string[] args)
         {
             Launch();
@@ -44,7 +51,7 @@ namespace splanker
 
             frame.CurrentScreen = ScreenController.MainMenuScreen;
             frame.CurrentScreen = ScreenController.GenerateGameScreen(gameState);
-            frame.Run(100, 0);
+            frame.Run(OpenGLUpdateFrequency, 0);
         }
     }
 }
