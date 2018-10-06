@@ -11,6 +11,9 @@ namespace splanker.src.Network
 {
     class GameConnection
     {
+        const int PORT_NO = 420;
+        const string SERVER_IP = "46.239.124.155";
+
         public void Connect()
         {
             var macAddr =
@@ -23,17 +26,17 @@ namespace splanker.src.Network
             if (macAddr.StartsWith("0860"))
             {
                 Console.WriteLine("seba");
+                BeHost();
             }
             else
             {
                 Console.WriteLine("not seba");
+                BeClient();
             }
         }
 
         public void BeClient()
         {
-            const int PORT_NO = 5000;
-            const string SERVER_IP = "127.0.0.1";
             {
                 // data to send to the server
                 string textToSend = DateTime.Now.ToString();
@@ -59,13 +62,11 @@ namespace splanker.src.Network
 
         public void BeHost()
         {
-            const int PORT_NO = 5000;
-            const string SERVER_IP = "127.0.0.1";
 
             {
                 // listen at the specified IP and port no. 
                 IPAddress localAdd = IPAddress.Parse(SERVER_IP);
-                TcpListener listener = new TcpListener(localAdd, PORT_NO);
+                TcpListener listener = new TcpListener(new IPEndPoint(IPAddress.Any, 420));
                 Console.WriteLine("Listening...");
                 listener.Start();
 

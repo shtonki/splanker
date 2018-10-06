@@ -9,6 +9,7 @@ using splanker.src.state;
 using splanker.src.util;
 using splanker.src.Network;
 using System.Net.NetworkInformation;
+using System.Globalization;
 
 namespace splanker
 {
@@ -31,6 +32,8 @@ namespace splanker
 
         private static void Main(string[] args)
         {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+
             if (RunDebugNonsense)
             {
                 DebugNonsense(args);
