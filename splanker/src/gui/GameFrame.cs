@@ -16,7 +16,10 @@ namespace splanker
 
         public Screen CurrentScreen { get; set; }
 
-        public GameFrame() : base(1024, 720, new GraphicsMode(32, 24, 0, 32))
+        public const int WIDTH = 1024;
+        public const int HEIGHT = 720;
+
+        public GameFrame() : base(WIDTH, HEIGHT, new GraphicsMode(32, 24, 0, 32))
         {
         }
 
@@ -88,6 +91,18 @@ namespace splanker
 
             SwapBuffers();
             GL.PopMatrix();
+        }
+
+        protected override void OnMouseDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseDown(e);
+            CurrentScreen?.HandleInput(new InputUnion(InputUnion.Directions.Down, e));
+        }
+
+        protected override void OnMouseUp(MouseButtonEventArgs e)
+        {
+            base.OnMouseDown(e);
+            CurrentScreen?.HandleInput(new InputUnion(InputUnion.Directions.Up, e));
         }
 
         protected override void OnKeyDown(KeyboardKeyEventArgs e)

@@ -2,6 +2,8 @@
 using splanker.src.state;
 using splanker.src.util;
 using System;
+using OpenTK.Input;
+using splanker.src.gui.GUIElements;
 
 namespace splanker.src.gui.screens
 {
@@ -64,14 +66,44 @@ namespace splanker.src.gui.screens
                 _ => GameState.Hero.Speed.Y = -0.01f,
                 _ => GameState.Hero.Speed.Y = 0
                 ));
+
+            // Mouse
+
+            Line line = null;
+            Entity moveMarker = null;
+            Bind(new Hotkey(
+                input => input.IsMouseInput,
+                input =>
+                {
+                    GLCoordinate gc = new GLCoordinate(input.MouseButtonArgs.X, input.MouseButtonArgs.Y);
+                    
+                    //todo: dont mix guielements with game elements because this is what happens.
+                    line = new Line(new GLCoordinate(gc.ToGameCoordinate().X, gc.ToGameCoordinate().Y), new GLCoordinate(GameState.Hero.Location.X, GameState.Hero.Location.Y));
+                    GameState.CurrentRoom.Add(line);
+                    GameState.CurrentRoom.Remove(moveMarker);
+                },
+                input =>
+                {
+                    GLCoordinate gc = new GLCoordinate(input.MouseButtonArgs.X, input.MouseButtonArgs.Y);
+                    GameState.CurrentRoom.Remove((IGUIElement)line);
+                    moveMarker = new Entity(gc.ToGameCoordinate());
+                    GameState.CurrentRoom.Add(moveMarker);
+                }
+            ));
+
         }
 
         public override void Draw(DrawFacade drawFacade)
         {
             base.Draw(drawFacade);
-            foreach (var entity in GameState.CurrentRoom.Entities)
+            foreach (var entity in GameState.CurrentRoom.GetEntitites())
             {
                 entity.Draw(drawFacade);
+            }
+
+            foreach (var element in GameState.CurrentRoom.GetElements())
+            {
+                element.Draw(drawFacade);
             }
 
         }

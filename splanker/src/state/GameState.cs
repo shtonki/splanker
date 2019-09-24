@@ -1,4 +1,6 @@
-﻿namespace splanker.src.state
+﻿using splanker.src.util;
+
+namespace splanker.src.state
 {
     class GameState
     {
@@ -8,9 +10,12 @@
 
         public GameState()
         {
-            CurrentRoom = new Room();
-
+            CurrentRoom = new StartingRoom();
             Hero = new Entity();
+            Hero.Location = new GameCoordinate(0.2f, 0.2f);
+            Hero.Size = new GameCoordinate(0.1f, 0.1f);
+            CurrentRoom.Add(Hero);
+
         }
 
         public void Step()

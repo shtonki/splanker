@@ -40,5 +40,16 @@ namespace splanker.src.gui
 
             GL.End();
         }
+
+        public void DrawLine(GLCoordinate origin, GLCoordinate terminus, Color color)
+        {
+            GL.Begin(PrimitiveType.LineLoop);
+
+            GL.Color4(color);
+            GL.Vertex2(origin.X, origin.Y);
+            GL.Vertex2(terminus.X, terminus.Y);
+
+            GL.End();
+        }
     }
 }

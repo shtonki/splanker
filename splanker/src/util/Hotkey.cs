@@ -11,8 +11,17 @@ namespace splanker.src.util
         public KeyboardKeyEventArgs KeyboardArgs { get; }
         public bool IsKeyboardInput => KeyboardArgs != null;
 
+        public MouseButtonEventArgs MouseButtonArgs { get; }
+        public bool IsMouseInput => MouseButtonArgs != null;
+
         public Buttons? GamePadButtonArgs { get; }
         public bool IsGamePadInput => GamePadButtonArgs != null;
+
+        public InputUnion(Directions direction, MouseButtonEventArgs buttonArgs)
+        {
+            Direction = direction;
+            MouseButtonArgs = buttonArgs;
+        }
 
         public InputUnion(Directions direction, KeyboardKeyEventArgs keyboardArgs)
         {
@@ -36,7 +45,10 @@ namespace splanker.src.util
             {
                 return GamePadButtonArgs.ToString();
             }
-
+            if (IsMouseInput)
+            {
+                return MouseButtonArgs.ToString();
+            }
             return "Failed to stringify InputUnion";
         }
     }
@@ -67,7 +79,7 @@ namespace splanker.src.util
         {
             if (Filter(input))
             {
-                Callback(input);
+                Callback?.Invoke(input);
             }
         }
 

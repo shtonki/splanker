@@ -1,52 +1,62 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using splanker.src.gui;
+using splanker.src.gui.GUIElements;
+using splanker.src.state;
 
 namespace splanker
 {
-    class Room
+    abstract class Room
     {
-        public Entities Entities { get; } = new Entities();
-
-        public Room()
-        {
-        }
+        protected Entities entities { get; set; }
+        protected List<IGUIElement> elements { get; set; }
 
         public void Step()
         {
-            foreach (var ent in Entities)
+            foreach (var ent in entities)
             {
                 ent.Step();
             }
         }
 
+        public void Add(Entity e)
+        {
+            entities.Add(e);
+        }
+
+        public void Add(IGUIElement g)
+        {
+            elements.Add(g);
+        }
+
+        public List<IGUIElement> GetElements()
+        {
+            return this.elements;
+        }
+
+        public Entities GetEntitites()
+        {
+            return entities;
+        }
+
+        public void Remove(IGUIElement element)
+        {
+            elements.Remove(element);
+        }
+
+        internal void Remove(Entity moveMarker)
+        {
+            entities.Remove(moveMarker);
+        }
     }
 
-    /// <summary>
-    /// Class which acts as a container class for the set of
-    /// Entities in a room.
-    /// </summary>
-    class Entities : IEnumerable<Entity>
+    class StartingRoom : Room
     {
-        private List<Entity> EntityList = new List<Entity>();
-
-        /// <summary>
-        /// Adds an entity
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <todo> Callbacks </todo>
-        public void Add(Entity entity)
+        public StartingRoom()
         {
-            EntityList.Add(entity);
-        }
-
-        public IEnumerator<Entity> GetEnumerator()
-        {
-            return EntityList.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return EntityList.GetEnumerator();
+            base.entities = new Entities();
+            base.elements = new List<IGUIElement>();
         }
     }
 }

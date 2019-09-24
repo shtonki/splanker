@@ -15,6 +15,16 @@ namespace splanker
         public GameCoordinate Size { get; set; } = new GameCoordinate(0.01f, 0.01f);
         public GameCoordinate Speed { get; set; } = new GameCoordinate(0, 0);
 
+        public Entity()
+        {
+
+        }
+
+        public Entity(GameCoordinate location)
+        {;
+            this.Location = location;
+        }
+
         public void Draw(DrawFacade drawFacade)
         {
             drawFacade.FillRectangle(

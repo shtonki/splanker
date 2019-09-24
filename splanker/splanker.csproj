@@ -50,6 +50,7 @@
     <Compile Include="src\gui\DrawAdapter.cs" />
     <Compile Include="src\gui\GameFrame.cs" />
     <Compile Include="src\gui\GUIElement.cs" />
+    <Compile Include="src\gui\GUIElements\Line.cs" />
     <Compile Include="src\gui\GUIElements\RectangularElement.cs" />
     <Compile Include="src\gui\Screen.cs" />
     <Compile Include="src\gui\screens\GameScreen.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="src\Network\GameConnection.cs" />
     <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\state\Entities.cs" />
     <Compile Include="src\state\Entity.cs" />
     <Compile Include="src\state\GameState.cs" />
     <Compile Include="src\state\Room.cs" />

@@ -1,14 +1,14 @@
-﻿using splanker.src.util;
-using System.Drawing;
+﻿using System.Drawing;
+using splanker.src.util;
 
 namespace splanker.src.gui.GUIElements
 {
-    class RectangularElement : IGUIElement
+    class Line : IGUIElement
     {
         public GLCoordinate Origin;
         public GLCoordinate Terminus;
 
-        public RectangularElement(GLCoordinate origin, GLCoordinate terminus)
+        public Line(GLCoordinate origin, GLCoordinate terminus)
         {
             Origin = origin;
             Terminus = terminus;
@@ -16,9 +16,7 @@ namespace splanker.src.gui.GUIElements
 
         public void Draw(DrawFacade drawFacade)
         {
-            drawFacade.FillRectangle(Origin, Terminus, Color.Crimson);
+            drawFacade.DrawLine(Origin, Terminus, Color.BlueViolet);
         }
     }
-
-
 }
