@@ -51,6 +51,9 @@
     <Compile Include="src\gui\GameFrame.cs" />
     <Compile Include="src\gui\GUIElement.cs" />
     <Compile Include="src\gui\GUIElements\Line.cs" />
+    <Compile Include="src\gui\Hero.cs" />
+    <Compile Include="src\state\IInteractable.cs" />
+    <Compile Include="src\gui\NextTurnButton.cs" />
     <Compile Include="src\gui\GUIElements\RectangularElement.cs" />
     <Compile Include="src\gui\Screen.cs" />
     <Compile Include="src\gui\screens\GameScreen.cs" />

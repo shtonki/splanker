@@ -2,6 +2,8 @@
 using splanker.src.state;
 using splanker.src.util;
 using System;
+using System.Drawing;
+using System.Linq;
 using OpenTK.Input;
 using splanker.src.gui.GUIElements;
 
@@ -69,10 +71,27 @@ namespace splanker.src.gui.screens
 
             // Mouse
 
+            Bind(new Hotkey(
+                input => input.IsMouseInput && input.MouseButtonArgs.Button == MouseButton.Left,
+                input =>
+                {
+                    GLCoordinate gc = new GLCoordinate(input.MouseButtonArgs.X, input.MouseButtonArgs.Y);
+                    Console.WriteLine(gc.ToGameCoordinate());
+                    foreach (IInteractable ent in GameState.CurrentRoom.GetEntitites().Where(e => e.Contains(gc.ToGameCoordinate()) && e is IInteractable))
+                    {
+                        ent.Interact(GameState);
+                    }
+                },
+                input =>
+                {
+
+                }
+            ));
+
             Line line = null;
             Entity moveMarker = null;
             Bind(new Hotkey(
-                input => input.IsMouseInput,
+                input => input.IsMouseInput && input.MouseButtonArgs.Button == MouseButton.Right,
                 input =>
                 {
                     GLCoordinate gc = new GLCoordinate(input.MouseButtonArgs.X, input.MouseButtonArgs.Y);
@@ -87,6 +106,7 @@ namespace splanker.src.gui.screens
                     GLCoordinate gc = new GLCoordinate(input.MouseButtonArgs.X, input.MouseButtonArgs.Y);
                     GameState.CurrentRoom.Remove((IGUIElement)line);
                     moveMarker = new Entity(gc.ToGameCoordinate());
+                    GameState.Hero.GoingTo = moveMarker.Location;
                     GameState.CurrentRoom.Add(moveMarker);
                 }
             ));
